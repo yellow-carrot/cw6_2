@@ -6,7 +6,7 @@ from users.models import User
 
 
 class Ad(models.Model):
-    image = models.ImageField(null=True, blank=True, upload_to='media/')
+    image = models.ImageField(default=None, null=True, blank=True, upload_to='media/')
     title = models.CharField(max_length=100, null=False, blank=False, validators=[MinLengthValidator(5)])
     price = models.PositiveIntegerField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
