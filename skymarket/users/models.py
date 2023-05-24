@@ -16,11 +16,12 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone = PhoneNumberField()
-    email = models.EmailField()
+    email = models.EmailField(unique=True)
     role = models.CharField(max_length=10, choices=UserRoles.choices, default=UserRoles.USER)
     image = models.ImageField(blank=True, null=True)
     is_active = models.BooleanField(default=False)
 
+    objects = UserManager()
     USERNAME_FIELD = 'email'
 
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', "role"]
@@ -46,4 +47,4 @@ class User(AbstractBaseUser):
     def is_user(self):
         return self.role == UserRoles.USER
 
-    objects = UserManager()
+
